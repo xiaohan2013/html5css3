@@ -1,0 +1,22 @@
+#wrap{
+
+}
+
+header{
+	background:lightgray;
+	height:100px;
+}
+header > nav > ul > li{
+	list-style: none;
+	float:left;
+	width: 100px;
+	text-align: center;
+	background-image: -webkit-linear-gradient(to top,orange,green);
+	background-image: linear-gradient(to top,orange,green);
+}
+header > nav > ul > li > a{
+	text-decoration: none;
+}
+aside{
+
+}
