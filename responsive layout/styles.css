@@ -6,17 +6,58 @@ header{
 	background:lightgray;
 	height:100px;
 }
-header > nav > ul > li{
-	list-style: none;
-	float:left;
-	width: 100px;
-	text-align: center;
+
+header nav{
+	border: 2px solid red;
+}
+
+header nav ul{ 
+	background-color: #4587B6;
 	background-image: -webkit-linear-gradient(to top,orange,green);
 	background-image: linear-gradient(to top,orange,green);
+	padding: 20px 0;
+}
+
+header > nav > ul > li{
+	display: inline-block;
+	list-style: none;
+	float:left;
+	width: 200px;
+	text-align: center;
 }
 header > nav > ul > li > a{
+	display: inline-block;
 	text-decoration: none;
+	width: 100px;
+	margin: auto auto;
+	font-size: 20px;
+	font-weight: bolder;
+}
+
+@media screen and (max-width: 600px){
+	header > nav > ul > li{
+		float:left;
+		width: 50px;
+	}
+	header > nav > ul > li > a{
+		width: 50px;
+		font-size: 6px;
+	}
 }
 aside{
 
+}
+
+footer{
+	margin: auto auto;
+	border: 1px solid red;
+	text-align: center;
+	width:100%; 
+	position: fixed;
+	bottom: 0;
+	left: 0;
+}
+
+.mosuemove:hover{
+	background-color: #FF5500;
 }
