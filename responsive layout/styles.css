@@ -13,8 +13,11 @@ header nav{
 
 header nav ul{ 
 	background-color: #4587B6;
-	background-image: -webkit-linear-gradient(to top,orange,green);
-	background-image: linear-gradient(to top,orange,green);
+	background-image: -webkit-linear-gradient(to top,orange,green);/**/
+	background-image: -moz-linear-gradient(top,green,orange);/*Mozilas*/
+	background-image: linear-gradient(to top,orange,green);/*W3C*/
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr="#ffffff",endColorstr="#ff0000");/*IE6,IE7*/
+	-ms-filter:"progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#ff0000')"; /* IE8 */
 	padding: 20px 0;
 }
 
