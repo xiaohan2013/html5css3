@@ -5,31 +5,12 @@
 	<meta charset="utf-8">
 	<!-- <script type="text/javascript" src="http://code.jquery.com/jquery-2.1.0.min.js"></script> -->
 	<script type="text/javascript">
-		var loadJS = function(source){
-		var script = document.createElement("script");			
-		EventUitls.addHandler(script,"readystatechange",function(event){
-			event = EventUitls.getEvent(event);
-			var target = EventUtils.getTarget(event);
-			if(target.readyState == "loaded"){
-				EventUtils.addHandler(target,"readystatechange",arguments.callee);
-				alert("Loaded ");
-			}
-			if(target.readyState == "complete"){
-				EventUtils.addHandler(target,"readystatechange",arguments.callee);
-				alert("Complete ");
-			}
-		});
-		script.src = source;
-		script.type = "text/javascript";
-		document.body.appendChild(script);
-		}
-
 		var EventUitls = {
 			addHandler:function(elem,type,handler){
 				if(elem.addEventListener){//W3C
 					elem.addEventListener(type,handler,false);
-				}else if(elem.attachEvent){
-					elem.attachEvent("on",type,handler);
+				}else if(elem.attachEvent){//IE
+					elem.attachEvent("on"+type,handler);
 				}else{
 					elem["on"+type] = handler;
 				}
@@ -48,29 +29,79 @@
 				}
 			}
 		};
+
+		var LoadJS = function(source){
+			var script = document.createElement("script");
+			var head= document.querySelector('head'); 
+			//alert(head);
+			script.src = source;
+			script.type = "text/javascript";
+
+			//只针对IE浏览器	
+			/*EventUitls.addHandler(script,"readystatechange",function(event){
+				event = EventUitls.getEvent(event);
+				var target = EventUtils.getTarget(event);
+				alert(event.type);
+				if(target.readyState == "loaded" || target.readyState == "complete"){
+					//EventUtils.addHandler(target,"readystatechange",arguments.callee);
+					alert("Loaded ");
+				}
+			});*/
+			//IE,只针对第一次加载
+			EventUitls.addHandler(script,"readystatechange",function(event){
+				event = EventUitls.getEvent(event);
+				var target = EventUitls.getTarget(event);
+				//alert(target.readyState);
+				if(target.readyState == "loaded" || target.readyState == "complete"){
+					EventUtils.addHandler(target,"readystatechange",arguments.callee);
+					alert("Loaded  IE ");
+				}
+			});
+			//非IE
+			if(typeof script.onload == "object"){
+				EventUitls.addHandler(script,"load",function(event){
+					event = EventUitls.getEvent(event);
+					var target = EventUitls.getTarget(event);
+					//alert(script.readyState);
+					if(target.readyState == "loaded" || target.readyState == "complete"){
+						EventUtils.addHandler(target,"readystatechange",arguments.callee);
+						alert("Loaded  Not IE ");
+					}
+				});
+			}
+
+/*			alert("1234");
+			script.onreadystatechange = function(){
+				if(script.readyState == "loaded" || script.readyState == "complete"){
+					EventUtils.addHandler(script,"readystatechange",arguments.callee);
+					alert("Loaded ");
+				}
+			};
+*/			head.appendChild(script);
+		}
 	</script>
 	<script type="text/javascript">
 		//等所有的资源都加载完毕才触发该事件
 		window.onload = function(){
-			alert("onload");
-			loadJS("http://code.jquery.com/jquery-2.1.0.min.js");
+			alert("loading------------->");
+			LoadJS("http://code.jquery.com/jquery-2.1.0.js");
+			alert("loaded<--------------");
+			var w = document.querySelector("#weather");
+			EventUitls.addHandler(w,"click",function(){
+				//alert(w.innerText);
+			});	
 		};
 		//DOMContentLoaded,只有在DOM 树构建完成才触发该事件，W3C
 		document.addEventListener("DOMContentLoaded",function(){
 			alert("DOM Load finish!!!");
 		});
 
-		$.ajax({
-			url:"http://www.weather.com.cn/data/sk/101010100.html",
-			dataType:json,
-			success:function(data){
-				console.console.log(data);
-			}
-		});
 	</script>
 </head>
 <body>
-	<div id="weather"></div>
+	<div id="weather">
+		天气
+	</div>
 	<img src="http://www.iefans.net/wp-content/uploads/2013/12/7046_w3c.png">
 </body>
 </html>
