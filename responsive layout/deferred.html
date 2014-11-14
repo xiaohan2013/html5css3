@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Deferred--延迟对象</title>
+	<meta charset="utf-8">
+	<!-- <script type="text/javascript" src="http://code.jquery.com/jquery-2.1.0.min.js"></script> -->
+	<script type="text/javascript">
+		var loadJS = function(source){
+		var script = document.createElement("script");			
+		EventUitls.addHandler(script,"readystatechange",function(event){
+			event = EventUitls.getEvent(event);
+			var target = EventUtils.getTarget(event);
+			if(target.readyState == "loaded"){
+				EventUtils.addHandler(target,"readystatechange",arguments.callee);
+				alert("Loaded ");
+			}
+			if(target.readyState == "complete"){
+				EventUtils.addHandler(target,"readystatechange",arguments.callee);
+				alert("Complete ");
+			}
+		});
+		script.src = source;
+		script.type = "text/javascript";
+		document.body.appendChild(script);
+		}
+
+		var EventUitls = {
+			addHandler:function(elem,type,handler){
+				if(elem.addEventListener){//W3C
+					elem.addEventListener(type,handler,false);
+				}else if(elem.attachEvent){
+					elem.attachEvent("on",type,handler);
+				}else{
+					elem["on"+type] = handler;
+				}
+			},
+			getEvent: function(event){
+				return event ? event : window.event;
+			},
+			getTarget: function(event){
+				return event.target || event.srcElement;
+			},
+			preventDefault: function(event){
+				if(event.preventDefault){
+					event.preventDefault();
+				}else{
+					event.returnValue = false;
+				}
+			}
+		};
+	</script>
+	<script type="text/javascript">
+		//等所有的资源都加载完毕才触发该事件
+		window.onload = function(){
+			alert("onload");
+			loadJS("http://code.jquery.com/jquery-2.1.0.min.js");
+		};
+		//DOMContentLoaded,只有在DOM 树构建完成才触发该事件，W3C
+		document.addEventListener("DOMContentLoaded",function(){
+			alert("DOM Load finish!!!");
+		});
+
+		$.ajax({
+			url:"http://www.weather.com.cn/data/sk/101010100.html",
+			dataType:json,
+			success:function(data){
+				console.console.log(data);
+			}
+		});
+	</script>
+</head>
+<body>
+	<div id="weather"></div>
+	<img src="http://www.iefans.net/wp-content/uploads/2013/12/7046_w3c.png">
+</body>
+</html>
