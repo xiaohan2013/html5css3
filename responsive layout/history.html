@@ -19,5 +19,29 @@
 			history.pushState({count:myNumber},null,'?num='+myNumber);
 			document.title = "Number "+myNumber
 		});
+
+		function setNumFromUrl(){
+			if(location.search){
+				var match = location.search.match(/num=([0-9]+)/);
+				if(match){
+					document.getElementById('number').innerHTML = match[1];
+					document.title = "Number " + match[1];
+				}else{
+					document.getElementById('number').innerHTML = 1;
+					document.title = "Number 1";
+				}
+			}
+		}
+
+		//针对需要后退或者前进的history，则需要页面也需要产生变化
+		//监听popState事件，给其添加一个事件的处理函数
+		addEventListener("popState",function(event){
+			if (event.state && event.state.count) {
+				num.innerHTML = e.state.count;
+				document.title = "Number " + event.state.count;
+			} else{
+				setNumFromUrl();
+			};
+		});
 	</script>
 </html>
