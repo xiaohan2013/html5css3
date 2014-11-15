@@ -32,7 +32,7 @@
 
 		var LoadJS = function(source){
 			var script = document.createElement("script");
-			var head= document.querySelector('head'); 
+			var head= document.querySelector('head'); //querySelector适用于IE8+,chrome,firefox
 			//alert(head);
 			script.src = source;
 			script.type = "text/javascript";
@@ -48,6 +48,7 @@
 				}
 			});*/
 			//IE,只针对第一次加载
+			//IE中使用onreadystatechange
 			EventUitls.addHandler(script,"readystatechange",function(event){
 				event = EventUitls.getEvent(event);
 				var target = EventUitls.getTarget(event);
@@ -58,18 +59,21 @@
 				}
 			});
 			//非IE
+			//Gecko,webkit浏览器和opera支持onload
+			alert("script.onload --> "+typeof script.onload);
 			if(typeof script.onload == "object"){
 				EventUitls.addHandler(script,"load",function(event){
 					event = EventUitls.getEvent(event);
 					var target = EventUitls.getTarget(event);
-					//alert(script.readyState);
-					if(target.readyState == "loaded" || target.readyState == "complete"){
-						EventUtils.addHandler(target,"readystatechange",arguments.callee);
+					//非IE下没有readyState
+					if(!target.readyState){
+						//arguments.callee  表示正在执行的函数
+						//arguments.caller  表示正在调用该函数的对象
+						//EventUtils.addHandler(target,"load",arguments.callee);
 						alert("Loaded  Not IE ");
 					}
 				});
 			}
-
 /*			alert("1234");
 			script.onreadystatechange = function(){
 				if(script.readyState == "loaded" || script.readyState == "complete"){
@@ -90,6 +94,7 @@
 			EventUitls.addHandler(w,"click",function(){
 				//alert(w.innerText);
 			});	
+			
 		};
 		//DOMContentLoaded,只有在DOM 树构建完成才触发该事件，W3C
 		document.addEventListener("DOMContentLoaded",function(){
@@ -97,6 +102,7 @@
 		});
 
 	</script>
+	<script type="text/javascript" src="lib/jquery-2.1.1.js"></script>
 </head>
 <body>
 	<div id="weather">
@@ -104,4 +110,65 @@
 	</div>
 	<img src="http://www.iefans.net/wp-content/uploads/2013/12/7046_w3c.png">
 </body>
+<script type="text/javascript">
+	//jquery 1.5+ $.ajax()返回Deferred对象
+	//jquery <1.5 $.ajax()返回的是XHR进行链式操作
+	$.ajax("http://fiddle.jshell.net/favicon.png").done(function(){
+		alert("Ajax 加载完毕！！！");
+	}).fail(function(){
+		alert("欧，no,失败了！！！");
+	});
+
+	//1、Deferred对象是在1.5版本才开始出现，主要是为了解决异步调用
+	//$.ajax是最典型的应用
+	//应用在延时操作中
+	//-----------------------------------------------------------
+	var dtd = $.Deferred();//新建Deferred对象
+	var wait = function(){
+		var tasks = function(){
+			alert("执行完毕");
+			dtd.resolve();//改变状态
+		};
+		setTiemout(tasks,5000);//延时
+		return dtd;
+	};
+
+	$.when(wait(dtd))
+　　.done(function(){ alert("哈哈，成功了！"); })
+　　.fail(function(){ alert("出错啦！"); });
+	dtd.resolve();//在外部改变状态
+
+	//2、为了不让在外部改变状态，需要用到Deferred.promise();
+	var dtd = $.Deferred();//新建Deferred对象
+	var wait = function(){
+		var tasks = function(){
+			alert("执行完毕");
+			dtd.resolve();//改变状态
+		};
+		setTiemout(tasks,5000);//延时
+		return dtd.promise();
+	};
+
+	$.when(wait(dtd))
+　　.done(function(){ alert("哈哈，成功了！"); })
+　　.fail(function(){ alert("出错啦！"); });
+	dtd.resolve();//在外部改变状态、
+
+	//3、将Deferred对象变成内部对象
+	var wait = function(){
+		var dtd = $.Deferred();//新建Deferred对象
+		var tasks = function(){
+			alert("执行完毕");
+			dtd.resolve();//改变状态
+		};
+		setTiemout(tasks,5000);//延时
+		return dtd.promise();
+	};
+
+	$.when(wait(dtd))
+　　.done(function(){ alert("哈哈，成功了！"); })
+　　.fail(function(){ alert("出错啦！"); });
+	dtd.resolve();//在外部改变状态	
+
+</script>
 </html>
