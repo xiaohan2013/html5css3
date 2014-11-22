@@ -1,15 +1,82 @@
 <!DOCTYPE html>
+
 <html>
 	<head>
 		<title>手势</title>
 		<meta charset="utf-8" >
 		<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
 		<meta name="viewport" content="width=device-width">
-		<script type="text/javascript" src="gesture.js"></script>
+		
+		
+		<style type="text/css">
+			body{
+				font-family: sans-serif;
+				background:#ccc;
+			}
+			.switchwrap{
+				background: linear-gradient(to bottom, #cccccc 0%, #eeeeee 100%);
+			}
+			.switchwrap .switch{
+				background: linear-gradient(to bottom, #b8e1fc 0%, #a9d2f3 10%,
+					#90baed 25%, #90bcea 37%, #90bff0 50%, #6ba8e5 51%, #a2daf4 83%,#bdf3fd 100%);
+				height: 28px;
+			}
+			form{
+				text-align: center;
+				width: 150px;
+				position: relative;
+				margin: auto;
+				font-size: 18px;
+			}
+			input{
+				font-size: 18px;
+			}
+
+			.js .switchwrap{
+				position: relative;
+				width:150px;
+				height: 30px;
+				margin: auto;
+				/*CSS3 box-shadow：向框添加一个或多个阴影*/
+				/*对象选择器 {box-shadow:投影方式 X轴偏移量 Y轴偏移量 阴影模糊半径 阴影扩展半径 阴影颜色}*/
+				-moz-box-shadow:inset 1px 1px 3px #000, inset -1px -1px 3px rgba(0,0,0,0.3);
+				-webkit-box-shadow:inset 1px 1px 3px #000, inset -1px -1px 3px rgba(0,0,0,0.3);
+				box-shadow: inset 1px 1px 3px #000, inset -1px -1px 3px rgba(0,0,0,0.3);
+				border-radius: 25px;
+				overflow: hidden;
+			}
+			.js .switchwrap .switch{
+				position: relative;
+				top:0;
+				left:0;
+				font-size: 12px;
+				width:78px;
+				border:1px solid #333;
+				border-radius: 25px;
+				-moz-box-shadow:1px 1px 2px rgba(0,0,0,0.5), inset 1px 1px 1px rgba(255,255,255,0.6);
+				-webkit-box-shadow:1px 1px 2px rgba(0,0,0,0.5), inset 1px 1px 1px rgba(255,255,255,0.6);
+				box-shadow: 1px 1px 2px rgba(0,0,0,0.5), inset 1px 1px 1px rgba(255,255,255,0.6);
+			}
+			.js .switchwrap #power{
+				position: relative;
+				top:0;
+				left:-1000px;
+			}
+		</style>
 	</head>
 	<body>
 		<h1>A Simple Switch</h1>
 		<h2>Power: <span id="status">OFF</span></h2>
-		
+		<form>
+			<label for="power">Power: </label>
+			<div class="switchwrap">
+				<div class="switch"></div>
+				<input type="checkbox" id="power" />
+			</div>
+			<p><input type="submit" value="Submit" /></p>
+		</form>
 	</body>
+	<!-- 添加到不支持JavaScript的用户代理上-->
+	<script type="text/javascript">document.body.className="js"</script>
+	<script type="text/javascript" src="gesture.js"></script>
 </html>
