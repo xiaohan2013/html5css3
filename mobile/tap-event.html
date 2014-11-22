@@ -4,8 +4,10 @@
 		<title>移动事件</title>
 		<meta charset="UTF-8" >
 		<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+		<meta http-equiv="content-script-type" content="text/javascript">
 		<meta name="viewport" content="width=device-width">
 		<script type="text/javascript" src="tap-event.js"></script>
+		<script type="text/javascript" src="../responsive layout/lib/jquery-2.1.1.js"></script>
 		<style type="text/css">
 			body{
 				margin:0;
@@ -13,7 +15,7 @@
 				font-family: Helmet, Freesans, sans-serif;
 				text-align: center;
 			}
-			.botton{
+			.button{
 				font-size: 16px;
 				padding: 10px;
 				font-weight: bold;
@@ -24,8 +26,9 @@
 				background: #ff3019;
 				opacity: 1;
 			}
-			.active .button:active{
+			.active,.button:active{
 				box-shadow: inset 0px 1px 3px #000, 0px 1px 2px #fff;
+			}
 
 			}
 			.picture{
@@ -36,10 +39,10 @@
 	<body>
 		<div id="touchename">
 			<button class="button" id="toggle">Toggle Picture</button>
-				<div class="pictrue" style="display:none;s">
+				<div class="picture" style="display:none;">
 					<p>Goldfinch by ibm4381 on Flickr</p>
-					<a href="http://www.flickr.com/photos/j_beans/324">
-						<img src="img.jpg" width="320" height="256" alt="Goldfinch">
+					<a href="www.baidu.com">
+						<img src="pic.jpg" width="320" height="256" alt="Goldfinch">
 					</a>
 				</div>
 		</div>
