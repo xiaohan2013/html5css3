@@ -1,0 +1,99 @@
+*{
+  margin:0;
+}
+img{
+  border:0;/*for IE8,when <a> contain img ,it will be wrong*/
+}
+html{
+  background: #000000;
+}
+body {
+
+
+}
+.footer-panel-style{
+  height:10em;
+  width:100%;
+  background-image: -webkit-linear-gradient(to top, #060607, #292829);
+  background-image:linear-gradient(to top, #060607, #292829);
+  background: -ms-linear-gradient(#292829 0%,#060607 100%); /** IE9 IE10 **/
+  -pie-background: linear-gradient(#292829 0%,#060607 100%);
+  behavior: url(/CSSforIE/lib/js/PIE.php);
+}
+#outskirts{
+  height:500px;
+  font-size:40px;
+    background-image: -webkit-linear-gradient( top, #393636, #000004);
+  background-image:linear-gradient(top, #393636, #000004);
+  background: -ms-linear-gradient(#393636 0%,#000004 100%); /** IE9 IE10 **/
+  -pie-background: linear-gradient(#393636 0%,#000004 100%);
+    behavior: url(/CSSforIE/lib/js/PIE.php);
+}
+
+.point-num{ 
+  color: #B50202;
+  text-align: center;
+  font-size:30px;
+}
+  .point-num:first-letter{
+    font-size:2.0em;
+  }
+
+.sdsd:first-letter
+{
+font-size:200%;
+color:#8A2BE2;
+}
+
+#footer { 
+  font-size: 30px;
+  color:#fff;
+}
+#footer ul.topic-btn-panel { 
+  height: 2.7em;
+  width: 22.8em;
+}
+.ul-horizon li { 
+  float: left;
+  list-style: none outside none;
+  text-decoration: none;
+}
+.ul-horizon li a { 
+  display: block;
+  text-align: center;
+  text-decoration: none;
+}
+  #footer ul.topic-btn-panel{
+    width:22.8em;
+    height:2.7em;
+  }
+  
+  #footer ul.topic-btn-panel li{
+    padding-left:0.8em;
+    padding-right:0.8em;
+    padding-top:0.7em;
+  }
+  #footer ul.topic-btn-panel li a, .page-panel a{
+    line-height:1.7em;
+    height:1.7em;
+    width:5em;
+    padding-left:2px;
+    padding-right:2px;
+    behavior: url(/CSSforIE/lib/js/PIE.php);
+  }
+  #footer ul.topic-btn-panel li a:hover, .page-panel a:hover{
+    border:2px solid #ffffff;
+    border-radius:0.5em;
+    -moz-border-radius:0.5em;/*old firefox*/
+    padding-left:0;
+    padding-right:0;
+        
+  }
+  #footer ul.topic-btn-panel li a.foot-but, .page-panel .foot-but{
+    border:2px solid #ffffff;
+
+    border-radius:0.5em;
+    -moz-border-radius:0.5em;/*old firefox*/
+    padding-left:0;
+    padding-right:0;
+  }

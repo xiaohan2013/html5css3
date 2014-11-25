@@ -99,9 +99,6 @@ function addTapListener(node, callback){
 	node.addEventListener('tap',callback);
 }
 
-
-
-
 //检测指针的类型
 function handleEvent(event){
 	switch(event.pointerType){
