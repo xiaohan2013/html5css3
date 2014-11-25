@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>CSS--实现圆角</title>
+		<meta charset="UTF-8">
+		<style type="text/css">
+			div.RoundedCorner{background: #9bd1fa} 
+			b.rtop, b.rbottom{display:block;background: #fff} 
+			b.rtop b, b.rbottom b{display:block;height: 1px;overflow: hidden; background: #9bd1fa}
+			b.r1{margin: 0 5px} 
+			b.r2{margin: 0 3px} 
+			b.r3{margin: 0 2px}
+			b.rtop b.r4, b.rbottom b.r4{margin: 0 1px;height: 2px;}
+		</style>
+		<script type="text/javascript" src="lib/js/DD_roundies.js"></script>
+		<script type="text/javascript">
+			  /* EXAMPLES */
+
+			  /* IE only */
+			  DD_roundies.addRule('.alert', '20px');
+
+			  /* varying radii, IE only */
+			  // DD_roundies.addRule('.something_else', '10px 4px');
+
+			  /* varying radii, "all" browsers */
+			  // DD_roundies.addRule('.yet_another', '5px', true);
+		</script>
+	</head>
+	<body>
+		<div class="roundedCorner">
+			<b class="rtop"><b class="r1"></b><b class="r2"></b><b class="r3"></b><b class="r4"></b></b>
+ 				<br/>无图片纯CSS实现圆角框<br/><br/>
+			<b class="rbottom"><b class="r4"></b><b class="r3"></b><b class="r2"></b><b class="r1"></b></b>
+		</div>
+		
+		<div class="alert" style="width:60px;height:60px;background:red;">
+			
+
+		</div>
+	</body>
+</html>
